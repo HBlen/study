@@ -12,7 +12,7 @@ class Employss_4_3 {
     {
         name =n;
         salary=s;
-       id=0;
+        id=0;
 
     }
     public String getName()
