@@ -4,11 +4,11 @@ public class Student{
   private String name;
   private String sex;
   private int age;
-  private  String id;
+  private long id;
   private String major;
   private double grade;
 
-  public Student (String name,String sex, int age,String id,String major,double grade){
+  public Student (String name,String sex, int age,long id,String major,double grade){
     this.name = name;
     this.sex = sex;
     this.age = age;
@@ -30,7 +30,7 @@ public class Student{
   public  void setSex(String sex){
     this.sex = sex;
   }
-  public String getId(){
+  public long getId(){
     return id;
   }
   /* public void setId(String id){
