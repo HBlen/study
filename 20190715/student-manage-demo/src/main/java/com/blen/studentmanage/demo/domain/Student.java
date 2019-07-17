@@ -59,8 +59,8 @@ public class Student{
   }
 
   public String toString(){
-    return "Student[name: " + name + "sex: " + sex + ", age: " + age
-        + "Id: " + id + ", major: " + major + "grade: " + grade + "]";
+    return "Student[name: " + name + ", sex: " + sex + ", age: " + age
+        + ", Id: " + id + ", major: " + major + ", grade: " + grade + "]";
   }
  /* public Student createStudent(String name,String sex, int age,long id,String major,double grade){
   return new Student(name, sex, age, id, major, grade);

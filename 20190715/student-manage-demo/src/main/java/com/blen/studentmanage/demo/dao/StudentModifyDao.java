@@ -4,12 +4,7 @@ import com.blen.studentmanage.demo.domain.Student;
 
 public interface StudentModifyDao {
 
-  void addStudent(String name,
-      String sex,
-      int age,
-      long id,
-      String major,
-      double grade);
+  void addStudent(Student student);
 
   void deleteStudent(long id);
 
