@@ -8,11 +8,21 @@ public class Student{
   private String major;
   private double grade;
 
-  public Student (String name,String sex, int age,long id,String major,double grade){
+  public Student(){}
+
+  public Student (String name,String sex, int age,String major,double grade){
     this.name = name;
     this.sex = sex;
     this.age = age;
+    this.major = major;
+    this.grade = grade;
+  }
+
+  public Student (String name,String sex, int age,String major,double grade,long id){
     this.id = id;
+    this.name = name;
+    this.sex = sex;
+    this.age = age;
     this.major = major;
     this.grade = grade;
   }
@@ -33,9 +43,9 @@ public class Student{
   public long getId(){
     return id;
   }
-  /* public void setId(String id){
+  public void setId(long id){
      this.id = id;
-   }*/
+   }
   public int getAge(){
     return age;
   }
@@ -62,17 +72,4 @@ public class Student{
     return "Student[name: " + name + ", sex: " + sex + ", age: " + age
         + ", Id: " + id + ", major: " + major + ", grade: " + grade + "]";
   }
- /* public Student createStudent(String name,String sex, int age,long id,String major,double grade){
-  return new Student(name, sex, age, id, major, grade);
-  }
-  public boolean delete(){
-
-  }
-  public boolean update(){
-
-  }
-  public boolean getById(){
-
-  }
-  */
 }

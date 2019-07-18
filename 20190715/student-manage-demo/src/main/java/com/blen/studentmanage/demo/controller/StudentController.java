@@ -4,6 +4,7 @@ import com.blen.studentmanage.demo.domain.Student;
 import com.blen.studentmanage.demo.service.StudentModifyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,64 +17,28 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "API-StudentController", description = "接口")
 @Validated
 public class StudentController {
-
-  private StudentModifyService studentModifyService = new StudentModifyService();
+  @Autowired
+  private StudentModifyService studentModifyService;// = new StudentModifyService();
 
   @GetMapping("/hello")
   public String sayHello() {
     return "hello world";
   }
 
-  /*
-  public String addStudent(
-      @RequestParam("name") String name,
-      @RequestParam("sex") String sex,
-      @RequestParam("age") Integer age,
-      @RequestParam("id") Long id,
-      @RequestParam("major") String major,
-      @RequestParam("grade") Double grade)
-
-      {
-
-   // Student student = new Student(name, sex, age, id, major, grade); "zhangsan","female",19,1302,"science",90
-    Student student = new Student("zhangsan","female",19,1302,"science",90);
-    studentModifyService.addStudent(student);
-    return studentModifyService.getStudent(student.getId()).toString();
-  }
-  */
-  /*
-    @RequestMapping("/add")
-    public String addStudent(HttpServletRequest request)
-    {
-      String name = request.getParameter("name");
-      String sex = request.getParameter("sex");
-      int age = Integer.parseInt(request.getParameter("age"));
-      long id = Long.parseLong(request.getParameter("student_id"));
-      String major = request.getParameter("major");
-      double grade = Double.parseDouble(request.getParameter("grade"));
-
-      Student student = new Student(name, sex, age, id, major, grade);// "zhangsan","female",19,1302,"science",9);
-
-      studentModifyService.addStudent(student);
-      return studentModifyService.getStudent(student.getId()).toString();
-    }
-  */
-
   @PostMapping("/add")
   @ApiOperation(value = "添加学生")
-  public String addStudent(
+  public Long addStudent(
       @RequestParam(value = "name") String name,
       @RequestParam(value = "sex") String sex,
       @RequestParam(value = "age") int age,
-      @RequestParam(value = "id") long id,
       @RequestParam(value = "major", required = false) String major,
       @RequestParam(value = "grade", required = false) double grade) {
 
     Student student =
-        new Student(name, sex, age, id, major, grade); // "zhangsan","female",19,1302,"science",9);
+        new Student(name, sex, age, major, grade); // "zhangsan","female",19,1302,"science",9);
 
     studentModifyService.addStudent(student);
-    return studentModifyService.getStudent(student.getId()).toString();
+    return student.getId();
   }
 
   @PostMapping("/delete")
@@ -81,12 +46,8 @@ public class StudentController {
   public String deleteStudent(@RequestParam(value = "id") long id) {
 
     studentModifyService.deleteStudent(id);
-    Student getStudent3 = studentModifyService.getStudent(id);
-    if (getStudent3 == null) {
-      return "deleted";
-    } else {
-      return "failed";
-    }
+    return "deleted";
+
   }
 
   @PostMapping("/update")
@@ -99,19 +60,16 @@ public class StudentController {
       @RequestParam(value = "major", required = false) String major,
       @RequestParam(value = "grade", required = false) double grade) {
 
-    Student student = new Student(name, sex, age, id, major, grade);
+    Student student = new Student(name, sex, age, major, grade,id);
     studentModifyService.updateStudent(student);
-
-    Student studentGet = studentModifyService.getStudent(id);
-    if (name.equals(studentGet.getName())) return "updated";
-    else return "failed";
+    return "updated";
   }
 
-  @GetMapping("/check")
+  @GetMapping("/get")
   @ApiOperation(value = "查询学生信息")
-  public String getStudent(@RequestParam(value = "id") long id) {
+  public Student getStudent(@RequestParam(value = "id") long id) {
     Student student = studentModifyService.getStudent(id);
-    if (student == null) return "failed";
-    else return student.toString();
+    if (student == null) return null;
+    else return student;
   }
 }

@@ -1,47 +1,31 @@
 package com.blen.studentmanage.demo.service;
 
-import java.util.ArrayList;
-
 import com.blen.studentmanage.demo.dao.StudentModifyDao;
 import com.blen.studentmanage.demo.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class StudentModifyService {
-
   @Autowired
-  private StudentModifyDao studentModifyDao;
-
-  private ArrayList<Student> studentList = new ArrayList<>();
+  private  StudentModifyDao studentModifyDao;
 
   /**
    * 添加学生
-   *
-   * @param name
-   * @param sex
-   * @param age
-   * @param id
-   * @param major
-   * @param grade
+   * @param student 学生信息
    */
+
   public void addStudent(Student student) {
-    //studentModifyDao.addStudent(student);
-    studentList.add(student);
+    studentModifyDao.addStudent(student);
   }
 
   /**
    * 根据id删除学生
    *
-   * @param id
+   * @param id 学生id
    */
   public void deleteStudent(long id) {
-    for (int i = 0; i < studentList.size(); i++) {
-      if (id == studentList.get(i).getId()) {
-        studentList.remove(i);
-        break;
-      }
-    }
+    studentModifyDao.deleteStudent(id);
   }
 
   /**
@@ -50,16 +34,7 @@ public class StudentModifyService {
    * @param student
    */
   public void updateStudent(Student student) {
-    for (int i = 0; i < studentList.size(); i++) {
-      if (student.getId() == studentList.get(i).getId()) {
-        studentList.get(i).setAge(student.getAge());
-        studentList.get(i).setGrade(student.getGrade());
-        studentList.get(i).setMajor(student.getMajor());
-        studentList.get(i).setName(student.getName());
-        studentList.get(i).setSex(student.getSex());
-        break;
-      }
-    }
+    studentModifyDao.updateStudent(student);
   }
 
   /**
@@ -69,12 +44,6 @@ public class StudentModifyService {
    * @return
    */
   public Student getStudent(long id) {
-
-    for (int i = 0; i < studentList.size(); i++) {
-      if (id == studentList.get(i).getId()) {
-        return studentList.get(i);
-      }
-    }
-    return null;
+    return studentModifyDao.getStudent(id);
   }
 }
