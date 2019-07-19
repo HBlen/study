@@ -1,0 +1,11 @@
+1.  Spring Boot 笔记
+spring boot创建应用 端口冲突8080 Failed to start component [Connector[HTTP/1.1-8080]]
+https://blog.csdn.net/LHX_ldm/article/details/81200643
+ 使用 Spring Boot 初始化项目
+https://start.spring.io/
+
+ Spring Boot建立新项目，遇到问题：“Whitelabel Error Page
+This application has no explicit mapping for /error, so you are seeing this as a fallback.”
+解决方法：http://tengj.top/2017/02/26/springboot1/
+2.  a.b.c的解决问题
+http://www.ibloger.net/article/3209.html 

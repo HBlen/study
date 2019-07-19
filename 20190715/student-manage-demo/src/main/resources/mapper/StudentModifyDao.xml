@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 将namespace的值设置为DAO类对应的路径 -->
+<mapper namespace="com.blen.studentmanage.demo.dao.StudentModifyDao">
+
+  <!-- 增加一条数据 -->
+  <insert id="addStudent" parameterType="com.blen.studentmanage.demo.domain.Student" keyColumn="id" keyProperty="id"  useGeneratedKeys="true">
+        INSERT INTO student(name,sex,age,major,grade) VALUES( #{name}, #{sex}, #{age}, #{major}, #{grade})
+    </insert>
+
+  <!-- 删除一条数据 -->
+  <delete id="deleteStudent" parameterType="long">
+        DELETE FROM student WHERE id = #{id}
+    </delete>
+
+  <!-- 更新一条数据 -->
+  <update id="updateStudent" parameterType="com.blen.studentmanage.demo.domain.Student">
+        UPDATE student SET student.name = #{name}, student.sex = #{sex},
+        student.age = #{age}, student.major = #{major}, student.grade = #{grade} WHERE student.id = #{id}
+    </update>
+
+  <!-- 查询一条数据 -->
+  <select id="getStudent" resultMap="resultMap" parameterType="long">
+        SELECT * FROM student WHERE id = #{id}
+    </select>
+
+  <resultMap id="resultMap" type="com.blen.studentmanage.demo.domain.Student">
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="sex" jdbcType="VARCHAR" property="sex"/>
+    <result column="age" jdbcType="BIGINT" property="age"/>
+    <result column="major" jdbcType="VARCHAR" property="major"/>
+    <result column="grade" jdbcType="DECIMAL" property="grade"/>
+  </resultMap>
+
+</mapper>
