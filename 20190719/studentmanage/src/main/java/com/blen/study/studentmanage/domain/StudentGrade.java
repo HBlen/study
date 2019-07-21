@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 
 public class StudentGrade {
-  private Long s_id;
+  private Long g_id;
   private Long s_code;
   private String s_name;
   private Integer g_year;

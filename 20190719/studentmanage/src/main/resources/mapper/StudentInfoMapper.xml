@@ -18,8 +18,8 @@
 
     <!-- 更新一条数据 -->
     <update id="updateStudentInfo" parameterType="com.blen.study.studentmanage.domain.StudentInfo">
-        UPDATE student_info SET student_info.s_name = #{s_name}, student_info.s_sex = #{s_sex},
-        student_info.s_age = #{s_age}, student_info.classname = #{classname} WHERE student_info.s_code = #{s_code}
+        UPDATE student_info SET s_name = #{s_name}, s_sex = #{s_sex},
+        s_age = #{s_age}, classname = #{classname} WHERE s_code = #{s_code}
     </update>
 
     <!-- 查询一条数据 -->

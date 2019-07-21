@@ -15,11 +15,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @MapperScan("com.blen.study.studentmanage.dao;")
-@SpringBootApplication//(scanBasePackages = {"com.blen.study.studentmanage.service"})
+@SpringBootApplication
 public class StudentmanageApplication {
 
   @Value("${swagger2.enable: true}")
-// @Value("${blen.swagger.switch:false}")
   private boolean swaggerSwitch;
 
   public static void main(String[] args) {

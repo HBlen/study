@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/studentinfo")
 @Api(value = "API-StudentInfoController", description = "接口")
 @Validated
 public class StudentInfoController {
