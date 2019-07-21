@@ -7,32 +7,32 @@
   <mapper namespace="com.blen.study.studentmanage.dao.StudentInfoMapper">
 
     <!-- 增加一条数据 -->
-    <insert id="addStudent" parameterType="com.blen.study.studentmanage.domain.StudentInfo" keyColumn="id" keyProperty="id"  useGeneratedKeys="true">
-        INSERT INTO student(name,sex,age,major,grade) VALUES( #{name}, #{sex}, #{age}, #{major}, #{grade})
+    <insert id="addStudentInfo" parameterType="com.blen.study.studentmanage.domain.StudentInfo" keyColumn="s_id" keyProperty="s_id"  useGeneratedKeys="true">
+        INSERT INTO student_info(s_code,s_name,s_sex,s_age,classname) VALUES( #{s_code}, #{s_name}, #{s_sex}, #{s_age}, #{classname})
     </insert>
 
     <!-- 删除一条数据 -->
-    <delete id="deleteStudent" parameterType="long">
-        DELETE FROM student WHERE id = #{id}
+    <delete id="deleteStudentInfo" parameterType="long">
+        DELETE FROM student_info WHERE s_code = #{s_code}
     </delete>
 
     <!-- 更新一条数据 -->
-    <update id="updateStudent" parameterType="com.blen.study.studentmanage.domain.StudentInfo">
-        UPDATE student SET student.name = #{name}, student.sex = #{sex},
-        student.age = #{age}, student.major = #{major}, student.grade = #{grade} WHERE student.id = #{id}
+    <update id="updateStudentInfo" parameterType="com.blen.study.studentmanage.domain.StudentInfo">
+        UPDATE student_info SET student_info.s_name = #{s_name}, student_info.s_sex = #{s_sex},
+        student_info.s_age = #{s_age}, student_info.classname = #{classname} WHERE student_info.s_code = #{s_code}
     </update>
 
     <!-- 查询一条数据 -->
     <select id="getStudentInfo" resultMap="resultMap" parameterType="long">
-        SELECT * FROM student WHERE s_code = #{s_code}
+        SELECT * FROM student_info WHERE s_code = #{s_code}
     </select>
 
     <resultMap id="resultMap" type="com.blen.study.studentmanage.domain.StudentInfo">
-      <id column="s_id" jdbcType="BIGINT" property="is_d"/>
-      <id column="s_code" jdbcType="BIGINT" property="s_cose"/>
+      <id column="s_id" jdbcType="BIGINT" property="s_id"/>
+      <id column="s_code" jdbcType="BIGINT" property="s_code"/>
       <result column="s_name" jdbcType="VARCHAR" property="s_name"/>
       <result column="s_sex" jdbcType="VARCHAR" property="s_sex"/>
-      <result column="s_age" jdbcType="BIGINT" property="age"/>
+      <result column="s_age" jdbcType="BIGINT" property="s_age"/>
       <result column="classname" jdbcType="VARCHAR" property="classname"/>
     </resultMap>
 </mapper>

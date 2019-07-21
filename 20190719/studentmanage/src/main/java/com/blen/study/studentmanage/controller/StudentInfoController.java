@@ -28,7 +28,7 @@ public class StudentInfoController {
 
   @PostMapping("/add")
   @ApiOperation(value = "添加学生信息")
-  public long addStudent(
+  public long addStudentInfo(
       @Valid @RequestBody StudentInfoCreatParam studentInfoCreatParam) {
     return  studentInfoService.addStudentInfo(studentInfoCreatParam);
 
@@ -36,14 +36,14 @@ public class StudentInfoController {
 
   @PostMapping("/delete")
   @ApiOperation(value = "删除学生信息")
-  public String deleteStudent(
-      @RequestParam(value = "s_code") long s_code) {
+  public String deleteStudentInfo(
+      @RequestParam(value = "s_code") Long s_code) {
     return studentInfoService.deleteStudentInfo(s_code);
   }
 
   @PostMapping("/update")
   @ApiOperation(value = "修改学生信息")
-  public int updateStudent(
+  public int updateStudentInfo(
       @Valid @RequestBody StudentInfoCreatParam studentInfoCreatParam) {
 
     return studentInfoService.updateStudentInfo(studentInfoCreatParam);
@@ -51,7 +51,7 @@ public class StudentInfoController {
 
   @GetMapping("/get")
   @ApiOperation(value = "查询学生信息")
-  public StudentInfo getStudent(@RequestParam(value = "id") long s_code) {
+  public StudentInfo getStudentInfo(@RequestParam(value = "s_code") long s_code) {
     return studentInfoService.getStudentInfo(s_code);
   }
 

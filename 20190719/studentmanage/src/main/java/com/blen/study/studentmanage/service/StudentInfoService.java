@@ -14,17 +14,19 @@ public class StudentInfoService {
 
   /**
    * 添加学生
-   * @param StudentInfo  学生信息
+   * @param studentInfoParam  学生信息
    */
 
   public long addStudentInfo(StudentInfoCreatParam studentInfoCreatParam) {
-    StudentInfo studentInfo = new StudentInfo(studentInfoCreatParam.getS_code(),
-        studentInfoCreatParam.getS_name(),
-        studentInfoCreatParam.getS_sex(),
-        studentInfoCreatParam.getS_age(),
-        studentInfoCreatParam.getClassname());
-    studentInfoMapper.addStudentInfo(studentInfo);
-    return studentInfo.getS_code();
+    StudentInfo studentInfo = StudentInfo.builder()
+        .s_code(studentInfoCreatParam.getS_code())
+        .s_name(studentInfoCreatParam.getS_name())
+       .s_sex(studentInfoCreatParam.getS_sex())
+        .s_age(studentInfoCreatParam.getS_age())
+        .classname(studentInfoCreatParam.getClassname())
+        .build();
+    return studentInfoMapper.addStudentInfo(studentInfo);
+   // studentInfo.getS_code();
   }
 
   /**
@@ -32,18 +34,19 @@ public class StudentInfoService {
    *
    * @param s_code 学生学号
    */
-  public String deleteStudentInfo(long s_code) {
+  public String  deleteStudentInfo(Long s_code) {
     StudentInfo studentInfoResp = studentInfoMapper.getStudentInfo(s_code);
     if(studentInfoResp == null){
       return "无该学号学生";
     }
-    return studentInfoMapper.deleteStudentInfo(s_code);
+    studentInfoMapper.deleteStudentInfo(s_code);
+    return "deleted";
   }
 
   /**
    * 更新学生信息
    *
-   * @param StudentInfoCreatParam 学生信息
+   * @param studentInfoCreatParam 学生信息
    */
   public int updateStudentInfo(StudentInfoCreatParam studentInfoCreatParam) {
     StudentInfo studentInfoResp = studentInfoMapper.getStudentInfo(studentInfoCreatParam.getS_code());
@@ -51,11 +54,12 @@ public class StudentInfoService {
       return 404;
     }
 
-    StudentInfo studentInfoReq = new  StudentInfo(studentInfoCreatParam.getS_code(),
-        studentInfoCreatParam.getS_name(),
-        studentInfoCreatParam.getS_sex(),
-        studentInfoCreatParam.getS_age(),
-        studentInfoCreatParam.getClassname());
+    StudentInfo studentInfoReq = StudentInfo.builder()
+        .s_name(studentInfoCreatParam.getS_name())
+        .s_sex(studentInfoCreatParam.getS_sex())
+        .s_age(studentInfoCreatParam.getS_age())
+        .classname(studentInfoCreatParam.getClassname())
+        .build();
     return studentInfoMapper.updateStudentInfo(studentInfoReq);
 
   }
@@ -63,17 +67,12 @@ public class StudentInfoService {
   /**
    * 根据id查找学生信息
    *
-   * @param id 学生学号
+   * @param s_code 学生学号
    * @return StudentInfo 学生信息
    */
-  public StudentInfo  getStudentInfo(long s_code) {
+  public StudentInfo  getStudentInfo(Long s_code) {
 
-    StudentInfo studentInfo = studentInfoMapper.getStudentInfo(s_code);
-    if (studentInfo == null) {
-      return null;
-    }
-    return studentInfo;
-
+    return studentInfoMapper.getStudentInfo(s_code);
   }
 //
 //  public List<StudentInfo> listStudentInfo(long start,long count){
