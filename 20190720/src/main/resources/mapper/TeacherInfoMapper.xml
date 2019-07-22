@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blen.student_manage_system.dao.TeacherInfoMapper">
+
+  <!-- 查询一条数据 -->
+  <select id="getTeacherInfo" resultMap="resultMap" parameterType="long">
+        SELECT * FROM teacher_info WHERE t_code = #{t_code} AND t_name = #{t_name}
+    </select>
+
+  <!-- 登录 -->
+  <select id="loginTeacher" resultMap="resultMap">
+        SELECT * FROM teacher_info WHERE t_code = #{t_code} AND password = #{password}
+    </select>
+
+  <resultMap id="resultMap" type="com.blen.student_manage_system.domain.TeacherInfo">
+    <id column="t_id" jdbcType="BIGINT" property="t_id"/>
+    <id column="t_code" jdbcType="BIGINT" property="t_code"/>
+    <result column="t_name" jdbcType="VARCHAR" property="t_name"/>
+    <result column="t_sex" jdbcType="VARCHAR" property="t_sex"/>
+    <result column="t_age" jdbcType="BIGINT" property="t_age"/>
+    <result column="classname" jdbcType="VARCHAR" property="classname"/>
+    <result column="password" jdbcType="VARCHAR" property="password"/>
+  </resultMap>
+
+</mapper>
