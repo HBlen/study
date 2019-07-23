@@ -19,7 +19,7 @@ public class TeacherInfoService {
 
   /**
    * 校验数据是否存在
-   * @param studentInfo
+   * @param teacherInfo
    */
   private void checkTeacherInfo(TeacherInfo teacherInfo) {
     if (teacherInfo == null) {
@@ -29,7 +29,7 @@ public class TeacherInfoService {
 
   /**
    * 添加教师
-   * @param teacherInfoCreatParam  教师信息
+   * @param param  教师信息
    */
 
   public long addTeacherInfo(TeacherInfoCreatParam param) {
@@ -65,13 +65,14 @@ public class TeacherInfoService {
   /**
    * 更新教师信息
    *
-   * @param teacherInfoCreatParam 教师信息
+   * @param param 教师信息
    */
   public int updateTeacherInfo(TeacherInfoCreatParam param) {
 
     TeacherInfo teacherInfoResp = teacherInfoMapper.getTeacherInfo(param.getCode(),param.getName());
     checkTeacherInfo(teacherInfoResp);
     TeacherInfo teacherInfoReq = TeacherInfo.builder()
+        .code(param.getCode())
         .name(param.getName())
         .sex(param.getSex())
         .age(param.getAge())

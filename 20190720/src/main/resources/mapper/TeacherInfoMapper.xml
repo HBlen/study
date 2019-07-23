@@ -25,11 +25,6 @@
         SELECT * FROM teacher_info WHERE t_code = #{code} AND t_name = #{name}
     </select>
 
-  <!-- 登录 -->
- <!-- <select id="loginTeacher" resultMap="resultMap">
-        SELECT * FROM teacher_info WHERE t_code = #{code} AND password = #{password}
-    </select>
--->
   <resultMap id="resultMap" type="com.blen.studentmanagesystem.domain.TeacherInfo">
     <id column="t_id" jdbcType="BIGINT" property="id"/>
     <id column="t_code" jdbcType="BIGINT" property="code"/>
@@ -37,7 +32,6 @@
     <result column="t_sex" jdbcType="VARCHAR" property="sex"/>
     <result column="t_age" jdbcType="BIGINT" property="age"/>
     <result column="classname" jdbcType="VARCHAR" property="classname"/>
-   <!-- <result column="password" jdbcType="VARCHAR" property="password"/>-->
   </resultMap>
 
 </mapper>
