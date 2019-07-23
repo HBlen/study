@@ -1,4 +1,4 @@
-package com.blen.student_manage_system.domain;
+package com.blen.studentmanagesystem.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,12 +12,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-public class TeacherInfo {
-  private Long t_id;
-  private Long t_code;
-  private String t_name;
-  private String t_sex;
-  private Integer t_age;
+public class StudentInfo {
+  private Long id;
+  private Long code;
+  private String name;
+  private String sex;
+  private Integer age;
   private String classname;
-  private String password;
 }

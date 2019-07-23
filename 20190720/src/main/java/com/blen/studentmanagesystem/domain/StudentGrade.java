@@ -1,4 +1,4 @@
-package com.blen.student_manage_system.domain;
+package com.blen.studentmanagesystem.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,11 +13,11 @@ import lombok.ToString;
 @ToString
 
 public class StudentGrade {
-  private Long g_id;
-  private Long s_code;
-  private String s_name;
-  private Integer g_year;
-  private Double g_math;
-  private Double g_english;
-  private Double g_chinese;
+  private Long id;
+  private Long code;
+  private String name;
+  private Integer year;
+  private Double math;
+  private Double english;
+  private Double chinese;
 }

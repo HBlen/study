@@ -1,4 +1,4 @@
-package com.blen.student_manage_system.controller.req;
+package com.blen.studentmanagesystem.controller.req;
 
 
 import javax.validation.constraints.NotNull;
@@ -15,46 +15,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ApiModel("业务能力")
+@ApiModel("学生信息")
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class StudentInfoCreatParam {
 
   @ApiParam(value = "学号", required = true)
   @NotNull
-  private Long s_code;
+  private Long code;
 
   @ApiParam(value = "姓名", required = true)
   @NotNull
-  private String s_name;
+  private String name;
 
   @ApiParam(value = "性别", required = true)
   @NotNull
-  private String s_sex;
+  private String sex;
 
   @ApiParam(value = "年龄", required = true)
   @NotNull
-  private Integer s_age;
+  private Integer age;
 
   @ApiParam(value = "班级", required = true)
   @NotNull
   private String classname;
 
-
-//
-//  public long getS_code(){
-//    return s_code;
-//  }
-//  public String getS_name(){
-//    return s_name;
-//  }
-//  public String getS_sex(){
-//    return s_sex;
-//  }
-//  public int getS_age(){
-//    return s_age;
-//  }
-//  public String getClassname(){
-//    return classname;
-//  }
 }

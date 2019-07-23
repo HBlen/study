@@ -1,9 +1,9 @@
 package service;
 public class TeacherInfoServiceTest{}
 //
-//import com.blen.student_manage_system.StudentManageSystemApplicationTests;
-//import com.blen.student_manage_system.domain.TeacherInfo;
-//import com.blen.student_manage_system.service.TeacherInfoService;
+//import com.blen.studentmanagesystem.StudentManageSystemApplicationTests;
+//import TeacherInfo;
+//import TeacherInfoService;
 //import org.junit.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //

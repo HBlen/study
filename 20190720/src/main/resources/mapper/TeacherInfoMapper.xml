@@ -2,26 +2,42 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.blen.student_manage_system.dao.TeacherInfoMapper">
+<mapper namespace="com.blen.studentmanagesystem.dao.TeacherInfoMapper">
+
+  <!-- 增加一条数据 -->
+  <insert id="addTeacherInfo" parameterType="com.blen.studentmanagesystem.domain.TeacherInfo" keyColumn="t_id" keyProperty="id"  useGeneratedKeys="true">
+        INSERT INTO teacher_info(t_code,t_name,t_sex,t_age,classname) VALUES( #{code}, #{name}, #{sex}, #{age}, #{classname})
+    </insert>
+
+  <!-- 删除一条数据 -->
+  <delete id="deleteTeacherInfo" parameterType="long">
+        DELETE FROM teacher_info WHERE t_code = #{code} AND t_name = #{name}
+    </delete>
+
+  <!-- 更新一条数据 -->
+  <update id="updateTeacherInfo" parameterType="com.blen.studentmanagesystem.domain.TeacherInfo">
+        UPDATE teacher_info SET teacher_info.t_name = #{name}, teacher_info.t_sex = #{sex},
+        teacher_info.t_age = #{age}, teacher_info.classname = #{classname} WHERE teacher_info.t_code = #{code}
+    </update>
 
   <!-- 查询一条数据 -->
-  <select id="getTeacherInfo" resultMap="resultMap" parameterType="long">
-        SELECT * FROM teacher_info WHERE t_code = #{t_code} AND t_name = #{t_name}
+  <select id="getTeacherInfo" resultMap="resultMap">
+        SELECT * FROM teacher_info WHERE t_code = #{code} AND t_name = #{name}
     </select>
 
   <!-- 登录 -->
-  <select id="loginTeacher" resultMap="resultMap">
-        SELECT * FROM teacher_info WHERE t_code = #{t_code} AND password = #{password}
+ <!-- <select id="loginTeacher" resultMap="resultMap">
+        SELECT * FROM teacher_info WHERE t_code = #{code} AND password = #{password}
     </select>
-
-  <resultMap id="resultMap" type="com.blen.student_manage_system.domain.TeacherInfo">
-    <id column="t_id" jdbcType="BIGINT" property="t_id"/>
-    <id column="t_code" jdbcType="BIGINT" property="t_code"/>
-    <result column="t_name" jdbcType="VARCHAR" property="t_name"/>
-    <result column="t_sex" jdbcType="VARCHAR" property="t_sex"/>
-    <result column="t_age" jdbcType="BIGINT" property="t_age"/>
+-->
+  <resultMap id="resultMap" type="com.blen.studentmanagesystem.domain.TeacherInfo">
+    <id column="t_id" jdbcType="BIGINT" property="id"/>
+    <id column="t_code" jdbcType="BIGINT" property="code"/>
+    <result column="t_name" jdbcType="VARCHAR" property="name"/>
+    <result column="t_sex" jdbcType="VARCHAR" property="sex"/>
+    <result column="t_age" jdbcType="BIGINT" property="age"/>
     <result column="classname" jdbcType="VARCHAR" property="classname"/>
-    <result column="password" jdbcType="VARCHAR" property="password"/>
+   <!-- <result column="password" jdbcType="VARCHAR" property="password"/>-->
   </resultMap>
 
 </mapper>

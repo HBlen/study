@@ -1,4 +1,4 @@
-package com.blen.student_manage_system.annotation;
+package com.blen.studentmanagesystem.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

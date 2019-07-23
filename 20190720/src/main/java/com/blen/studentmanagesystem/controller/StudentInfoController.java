@@ -1,10 +1,10 @@
-package com.blen.student_manage_system.controller;
+package com.blen.studentmanagesystem.controller;
 
 import javax.validation.Valid;
 
-import com.blen.student_manage_system.controller.req.StudentInfoCreatParam;
-import com.blen.student_manage_system.domain.StudentInfo;
-import com.blen.student_manage_system.service.StudentInfoService;
+import com.blen.studentmanagesystem.controller.req.StudentInfoCreatParam;
+import com.blen.studentmanagesystem.domain.StudentInfo;
+import com.blen.studentmanagesystem.service.StudentInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +34,9 @@ public class StudentInfoController {
 
   @PostMapping("/delete")
   @ApiOperation(value = "删除学生信息")
-  public String deleteStudentInfo(
-      @RequestParam(value = "s_code") Long s_code) {
-    return studentInfoService.deleteStudentInfo(s_code);
+  public int deleteStudentInfo(@RequestParam(value = "code") Long code,
+      @RequestParam(value = "name") String name) {
+    return studentInfoService.deleteStudentInfo(code, name);
   }
 
   @PostMapping("/update")
@@ -49,16 +49,10 @@ public class StudentInfoController {
 
   @GetMapping("/get")
   @ApiOperation(value = "查询学生信息")
-  public StudentInfo getStudentInfo(@RequestParam(value = "s_code") long s_code) {
-    return studentInfoService.getStudentInfo(s_code);
+  public StudentInfo getStudentInfo(@RequestParam(value = "code") Long code,
+      @RequestParam(value = "name") String name) {
+    return studentInfoService.getStudentInfo(code, name);
   }
 
-//  @GetMapping("/list")
-//  @ApiOperation(value = "按表查询学生信息")
-//  public List<StudentInfo> listStudentInfo(
-//      @RequestParam(value = "start") long start,
-//      @RequestParam(value = "count") long count){
-//    return studentInfoService.listStudentInfo(start,count);
-//  }
 
 }

@@ -1,4 +1,4 @@
-package com.blen.student_manage_system;
+package com.blen.studentmanagesystem;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-@MapperScan("com.blen.student_manage_system.dao;")
+@MapperScan("com.blen.studentmanagesystem.dao;")
 @SpringBootApplication
 public class StudentManageSystemApplication {
 
@@ -32,7 +32,7 @@ public class StudentManageSystemApplication {
           .enable(swaggerSwitch)
           .select()
           .apis(RequestHandlerSelectors.any())
-          .apis(RequestHandlerSelectors.basePackage("com.blen.student_manage_system.controller"))
+          .apis(RequestHandlerSelectors.basePackage("com.blen.studentmanagesystem.controller"))
           .paths(PathSelectors.any())
           .build();
     }
