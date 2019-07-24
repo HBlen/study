@@ -29,7 +29,7 @@ public class StudentInfoService {
 
   /**
    * 添加学生
-   * @param   学生信息
+   * @param param 学生信息
    */
 
   public long addStudentInfo(StudentInfoCreatParam param) {
@@ -47,7 +47,7 @@ public class StudentInfoService {
       return studentInfoMapper.getStudentInfo(param.getCode(),param.getName()).getId();
     } catch (Exception e) {
       log.error("addStudentInfo exception:{} ", studentInfo.toString(), e);
-      throw new ApiException(StudentManageErrorEnum.DUPLICATE_DATA);
+      throw new ApiException(StudentManageErrorEnum.SYSTEM_INTERNAL_ERROR);
     }
 
     return studentInfo.getId();
@@ -67,7 +67,7 @@ public class StudentInfoService {
   /**
    * 更新学生信息
    *
-   * @param studentInfoCreatParam 学生信息
+   * @param param 学生信息
    */
   public int updateStudentInfo(StudentInfoCreatParam param) {
     StudentInfo studentInfoResp = studentInfoMapper.getStudentInfo(param.getCode(),param.getName());
@@ -83,7 +83,7 @@ public class StudentInfoService {
 
   }
 
-  /**
+  /**d
    * 根据id查找学生信息
    *
    * @param code 学生学号

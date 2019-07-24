@@ -1,4 +1,4 @@
-package com.blen.student_manage_system;
+package com.blen.studentmanagesystem;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

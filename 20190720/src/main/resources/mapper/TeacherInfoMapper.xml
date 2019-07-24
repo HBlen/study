@@ -10,7 +10,7 @@
     </insert>
 
   <!-- 删除一条数据 -->
-  <delete id="deleteTeacherInfo" parameterType="long">
+  <delete id="deleteTeacherInfo" >
         DELETE FROM teacher_info WHERE t_code = #{code} AND t_name = #{name}
     </delete>
 

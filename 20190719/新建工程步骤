@@ -198,7 +198,69 @@ mybatis-configuration.xml 中内容：
     <property name="queryTimeoutSecond" value="5"/>
   </properties>
 </configuration>
+7. 设计实体，设计接入层dao，设计xml，设计业务层service，controller等，完成一个增删改查后写单侧，没问题后写剩余的
+
 
 1.数据库表不要用中划线命名
-2."message": "nested exception is org.apache.ibatis.reflection.ReflectionException: Could not set property 'is_d' of 'class com.blen.study.studentmanage.domain.StudentInfo' with value '1' Cause: org.apache.ibatis.reflection.ReflectionException: There is no setter for property named 'is_d' in 'class com.blen.study.studentmanage.domain.StudentInfo'",
+2."message": "nested exception is org.apache.ibatis.reflection.ReflectionException: Could not set property 
+'is_d' of 'class com.blen.study.studentmanage.domain.StudentInfo' with value '1' Cause: org.apache.ibatis.reflection.ReflectionException:
+ There is no setter for property named 'is_d' in 'class com.blen.study.studentmanage.domain.StudentInfo'",
 因为mapper.xml中有参数拼写错误
+3.sql语句语法错误{
+  "timestamp": "2019-07-23T01:42:36.910+0000",
+  "status": 500,
+  "error": "Internal Server Error",
+  "message": "\n### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: 
+  You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the 
+  right syntax to use near 'student_grade.g_english = 55.0 student_grade.g_chinese = 55.0\n        WHERE stud' 
+  at line 1\n### The error may exist in file [/Users/hanzhengbin/JavaDev/study/study/20190720/target/classes/mapper/StudentGradeMapper.xml]\n### 
+  The error may involve com.blen.studentmanagesystem.dao.StudentGradeMapper.updateStudentGrade-Inline\n### The error occurred while setting parameters\n### SQL: 
+  UPDATE student_grade SET student_grade.g_math = ? student_grade.g_english = ? student_grade.g_chinese = ?         WHERE student_grade.s_code = ? 
+  AND student_grade.g_year = ?\n### Cause:com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; 
+   check the manual that corresponds to your MySQL server version for the right syntax to use near 'student_grade.g_english = 55.0 student_grade.g_chinese = 55.0\n        WHERE stud'
+    at line 1\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; 
+    check the manual that corresponds to your MySQL server version for the right syntax to use near 'student_grade.g_english = 55.0 student_grade.g_chinese = 55.0\n        WHERE stud' at line 1",
+  "path": "/grade/update"
+}
+
+4. i18n 作用
+5. 测试错误
+SpringBoot Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or SpringBootTest(class = ...) with your test.
+原因：1. test文件夹应该和基类测试类在同一个文件夹下
+2. 还有一种情况就是该测试类在Test下的包名和java下的包名不一致导致的，亲测可以解决！
+6. junit 测试配置
+测试基类 ：
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+
+测试类： @Slf4j  ，并从基类继承以上设置
+配置文档xml：
+<!--Start test -->
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+    </dependency>
+    <!-- test End -->

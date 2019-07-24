@@ -53,7 +53,6 @@ public class TeacherInfoService {
 
   /**
    * 根据编号删除教师
-   *
    * @param code 教师编号
    */
   public int  deleteTeacherInfo(Long code, String name) {
