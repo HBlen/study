@@ -7,6 +7,7 @@ import com.blen.studentmanagesystem.domain.StudentInfo;
 import com.blen.studentmanagesystem.service.StudentInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +50,11 @@ public class StudentInfoController {
 
   @GetMapping("/get")
   @ApiOperation(value = "查询学生信息")
-  public StudentInfo getStudentInfo(@RequestParam(value = "code") Long code,
+  public StudentInfo getStudentInfo(
+      @ApiParam(value = "学号code")
+      @RequestParam(value = "code") Long code,
+
+      @ApiParam(value = "姓名name")
       @RequestParam(value = "name") String name) {
     return studentInfoService.getStudentInfo(code, name);
   }
