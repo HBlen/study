@@ -5,12 +5,12 @@
 <mapper namespace="com.blen.studentmanagesystem.dao.TeacherInfoMapper">
 
   <!-- 增加一条数据 -->
-  <insert id="addTeacherInfo" parameterType="com.blen.studentmanagesystem.domain.TeacherInfo" keyColumn="t_id" keyProperty="id"  useGeneratedKeys="true">
+  <insert id="addTeacherInfo" parameterType="com.blen.studentmanagesystem.domain.TeacherInfo">
         INSERT INTO teacher_info(t_code,t_name,t_sex,t_age,classname) VALUES( #{code}, #{name}, #{sex}, #{age}, #{classname})
     </insert>
 
   <!-- 删除一条数据 -->
-  <delete id="deleteTeacherInfo" >
+  <delete id="deleteTeacherInfo" parameterType="com.blen.studentmanagesystem.controller.req.TeacherInfoRemoveParam">
         DELETE FROM teacher_info WHERE t_code = #{code} AND t_name = #{name}
     </delete>
 

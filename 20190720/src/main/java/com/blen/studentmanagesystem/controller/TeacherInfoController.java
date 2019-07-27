@@ -2,7 +2,8 @@ package com.blen.studentmanagesystem.controller;
 
 import javax.validation.Valid;
 
-import com.blen.studentmanagesystem.controller.req.TeacherInfoCreatParam;
+import com.blen.studentmanagesystem.controller.req.TeacherInfoCreateParam;
+import com.blen.studentmanagesystem.controller.req.TeacherInfoRemoveParam;
 import com.blen.studentmanagesystem.domain.TeacherInfo;
 import com.blen.studentmanagesystem.service.TeacherInfoService;
 import io.swagger.annotations.Api;
@@ -28,25 +29,24 @@ public class TeacherInfoController {
   @PostMapping("/add")
   @ApiOperation(value = "添加教师信息")
   public long addTeacherInfo(
-      @Valid @RequestBody TeacherInfoCreatParam teacherInfoCreatParam) {
-    return  teacherInfoService.addTeacherInfo(teacherInfoCreatParam);
+      @Valid @RequestBody TeacherInfoCreateParam teacherInfoCreateParam) {
+    return  teacherInfoService.addTeacherInfo(teacherInfoCreateParam);
 
   }
 
   @PostMapping("/delete")
   @ApiOperation(value = "删除教师信息")
   public int deleteTeacherInfo(
-      @RequestParam(value = "code") Long code,
-      @RequestParam(value = "name") String name) {
-    return teacherInfoService.deleteTeacherInfo(code, name);
+      @Valid @RequestBody TeacherInfoRemoveParam removeParam) {
+    return teacherInfoService.deleteTeacherInfo(removeParam);
   }
 
   @PostMapping("/update")
   @ApiOperation(value = "修改教师信息")
   public int updateTeacherInfo(
-      @Valid @RequestBody TeacherInfoCreatParam teacherInfoCreatParam) {
+      @Valid @RequestBody TeacherInfoCreateParam teacherInfoCreateParam) {
 
-    return teacherInfoService.updateTeacherInfo(teacherInfoCreatParam);
+    return teacherInfoService.updateTeacherInfo(teacherInfoCreateParam);
   }
   @GetMapping("/get")
   @ApiOperation(value = "查询教师信息")

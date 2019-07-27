@@ -2,7 +2,8 @@ package com.blen.studentmanagesystem.service;
 
 import com.blen.studentmanagesystem.common.enums.StudentManageErrorEnum;
 import com.blen.studentmanagesystem.common.exception.ApiException;
-import com.blen.studentmanagesystem.controller.req.StudentInfoCreatParam;
+import com.blen.studentmanagesystem.controller.req.StudentInfoCreateParam;
+import com.blen.studentmanagesystem.controller.req.StudentInfoRemoveParam;
 import com.blen.studentmanagesystem.dao.StudentInfoMapper;
 import com.blen.studentmanagesystem.domain.StudentInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -29,56 +30,43 @@ public class StudentInfoService {
 
   /**
    * 添加学生
-   * @param param 学生信息
+   * @param saveParam 学生信息
    */
 
-  public long addStudentInfo(StudentInfoCreatParam param) {
-    StudentInfo studentInfo = StudentInfo.builder()
-        .code(param.getCode())
-        .name(param.getName())
-       .sex(param.getSex())
-        .age(param.getAge())
-        .classname(param.getClassname())
-        .build();
+  public long addStudentInfo(StudentInfoCreateParam saveParam) {
+    StudentInfo studentInfo = StudentInfo.buildFromCreatParam(saveParam);
 
     try {
-      studentInfoMapper.addStudentInfo(studentInfo);
+      return studentInfoMapper.addStudentInfo(studentInfo);
     } catch (DuplicateKeyException e) {
-      return studentInfoMapper.getStudentInfo(param.getCode(),param.getName()).getId();
+      return studentInfoMapper.getStudentInfo(saveParam.getCode(),saveParam.getName()).getId();
     } catch (Exception e) {
       log.error("addStudentInfo exception:{} ", studentInfo.toString(), e);
       throw new ApiException(StudentManageErrorEnum.SYSTEM_INTERNAL_ERROR);
     }
-
-    return studentInfo.getId();
   }
 
   /**
    * 根据id删除学生
    *
-   * @param code 学生学号
+   * @param removeParam 学生信息
    */
-  public int  deleteStudentInfo(Long code,String name) {
-    StudentInfo studentInfoResp = studentInfoMapper.getStudentInfo(code,name);
+  public int  deleteStudentInfo(StudentInfoRemoveParam removeParam ) {
+    StudentInfo studentInfoResp = studentInfoMapper.getStudentInfo(removeParam.getCode(),removeParam.getName());
     checkStudentInfo(studentInfoResp);
-    return studentInfoMapper.deleteStudentInfo(code,name);
+
+    return studentInfoMapper.deleteStudentInfo(removeParam);
     }
 
   /**
    * 更新学生信息
    *
-   * @param param 学生信息
+   * @param saveParam 学生信息
    */
-  public int updateStudentInfo(StudentInfoCreatParam param) {
-    StudentInfo studentInfoResp = studentInfoMapper.getStudentInfo(param.getCode(),param.getName());
+  public int updateStudentInfo(StudentInfoCreateParam saveParam) {
+    StudentInfo studentInfoResp = studentInfoMapper.getStudentInfo(saveParam.getCode(),saveParam.getName());
     checkStudentInfo(studentInfoResp);
-    StudentInfo studentInfoReq = StudentInfo.builder()
-        .code(param.getCode())
-        .name(param.getName())
-        .sex(param.getSex())
-        .age(param.getAge())
-        .classname(param.getClassname())
-        .build();
+    StudentInfo studentInfoReq = StudentInfo.buildFromCreatParam(saveParam);
     return studentInfoMapper.updateStudentInfo(studentInfoReq);
 
   }

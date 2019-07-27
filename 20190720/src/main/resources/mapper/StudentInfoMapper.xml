@@ -7,12 +7,12 @@
   <mapper namespace="com.blen.studentmanagesystem.dao.StudentInfoMapper">
 
     <!-- 增加一条数据 -->
-    <insert id="addStudentInfo" parameterType="com.blen.studentmanagesystem.domain.StudentInfo" keyColumn="s_id" keyProperty="id"  useGeneratedKeys="true">
+    <insert id="addStudentInfo" parameterType="com.blen.studentmanagesystem.domain.StudentInfo">
         INSERT INTO student_info(s_code,s_name,s_sex,s_age,classname) VALUES( #{code}, #{name}, #{sex}, #{age}, #{classname})
     </insert>
 
     <!-- 删除一条数据 -->
-    <delete id="deleteStudentInfo">
+    <delete id="deleteStudentInfo" parameterType="com.blen.studentmanagesystem.controller.req.StudentInfoRemoveParam" >
         DELETE FROM student_info WHERE s_code = #{code} AND s_name = #{name}
     </delete>
 

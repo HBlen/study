@@ -264,3 +264,18 @@ import org.springframework.test.context.junit4.SpringRunner;
       <artifactId>powermock-module-junit4</artifactId>
     </dependency>
     <!-- test End -->
+
+
+
+     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+      type="com.zaxxer.hikari.HikariDataSource"
+      connectionURL="jdbc:mysql://localhost:3306/ams_dw_fiat?characterEncoding=UTF-8"
+      userId="root"
+      password="newpass">
+    </jdbcConnection>
+
+    7. commit 时使用的个人邮箱，push不上去，解决方案：https://blog.csdn.net/Iron_Ye/article/details/83747266
+    修改最近一次提交
+     git commit --amend --author "blen <blen@gongsi.com>" --no-edit
+     查看 git log
+

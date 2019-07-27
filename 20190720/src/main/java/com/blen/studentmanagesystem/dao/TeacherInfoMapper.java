@@ -1,16 +1,20 @@
 package com.blen.studentmanagesystem.dao;
 
+import com.blen.studentmanagesystem.controller.req.TeacherInfoRemoveParam;
 import com.blen.studentmanagesystem.domain.TeacherInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface TeacherInfoMapper {
 
- TeacherInfo getTeacherInfo(Long code,String name);
+ TeacherInfo getTeacherInfo(
+     @Param("code") Long code,
+     @Param("name") String name);
 
- Long addTeacherInfo(TeacherInfo teacherInfo);
+ Long addTeacherInfo(TeacherInfo param);
 
- Integer deleteTeacherInfo(Long code, String name);
+ Integer deleteTeacherInfo(TeacherInfoRemoveParam removeParam);
 
  Integer updateTeacherInfo(TeacherInfo teacherInfo);
 

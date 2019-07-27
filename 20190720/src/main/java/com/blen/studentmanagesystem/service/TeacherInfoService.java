@@ -2,7 +2,8 @@ package com.blen.studentmanagesystem.service;
 
 import com.blen.studentmanagesystem.common.enums.StudentManageErrorEnum;
 import com.blen.studentmanagesystem.common.exception.ApiException;
-import com.blen.studentmanagesystem.controller.req.TeacherInfoCreatParam;
+import com.blen.studentmanagesystem.controller.req.TeacherInfoCreateParam;
+import com.blen.studentmanagesystem.controller.req.TeacherInfoRemoveParam;
 import com.blen.studentmanagesystem.dao.TeacherInfoMapper;
 import com.blen.studentmanagesystem.domain.TeacherInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -14,84 +15,74 @@ import org.springframework.stereotype.Service;
 @Service
 public class TeacherInfoService {
 
-  @Autowired
-  private TeacherInfoMapper teacherInfoMapper;
+    @Autowired
+    private TeacherInfoMapper teacherInfoMapper;
 
-  /**
-   * 校验数据是否存在
-   * @param teacherInfo
-   */
-  private void checkTeacherInfo(TeacherInfo teacherInfo) {
-    if (teacherInfo == null) {
-      throw new ApiException(StudentManageErrorEnum.DUPLICATE_DATA);
+    /**
+     * 校验数据是否存在
+     * @param teacherInfo
+     */
+    private void checkTeacherInfo(TeacherInfo teacherInfo) {
+      if (teacherInfo == null) {
+        throw new ApiException(StudentManageErrorEnum.DUPLICATE_DATA);
+      }
     }
-  }
 
-  /**
-   * 添加教师
-   * @param param  教师信息
-   */
+    /**
+     * 添加教师
+     * @param saveParam 教师信息
+     */
 
-  public long addTeacherInfo(TeacherInfoCreatParam param) {
-    TeacherInfo teacherInfo = TeacherInfo.builder()
-        .code(param.getCode())
-        .name(param.getName())
-        .sex(param.getSex())
-        .age(param.getAge())
-        .classname(param.getClassname())
-        .build();
-    try {
-      teacherInfoMapper.addTeacherInfo(teacherInfo);
-    } catch (DuplicateKeyException e) {
-      return teacherInfoMapper.getTeacherInfo(param.getCode(),param.getName()).getId();
-    } catch (Exception e) {
-      log.error("addTeacherInfo exception:{} ", teacherInfo.toString(), e);
-      throw new ApiException(StudentManageErrorEnum.DUPLICATE_DATA);
+    public long addTeacherInfo(TeacherInfoCreateParam saveParam) {
+      TeacherInfo teacherInfo = TeacherInfo.buildFromCreatParam(saveParam);
+
+      try {
+       return teacherInfoMapper.addTeacherInfo(teacherInfo);
+      } catch (DuplicateKeyException e) {
+        return teacherInfoMapper.getTeacherInfo(saveParam.getCode(),saveParam.getName()).getId();
+      } catch (Exception e) {
+        log.error("addTeacherInfo exception:{} ", saveParam.toString(), e);
+        throw new ApiException(StudentManageErrorEnum.SYSTEM_INTERNAL_ERROR);
+      }
+
     }
-    return teacherInfo.getId();
+
+    /**
+     * 根据id删除教师
+     *
+     * @param removeParam 教师学号
+     */
+    public int  deleteTeacherInfo(TeacherInfoRemoveParam removeParam ) {
+      TeacherInfo teacherInfoResp = teacherInfoMapper.getTeacherInfo(removeParam.getCode(),removeParam.getName());
+      checkTeacherInfo(teacherInfoResp);
+
+      return teacherInfoMapper.deleteTeacherInfo(removeParam);
+    }
+
+    /**
+     * 更新教师信息
+     *
+     * @param removeParam 教师信息
+     */
+    public int updateTeacherInfo(TeacherInfoCreateParam saveParam) {
+      TeacherInfo teacherInfoResp = teacherInfoMapper.getTeacherInfo(saveParam.getCode(),saveParam.getName());
+      checkTeacherInfo(teacherInfoResp);
+      TeacherInfo teacherInfoReq = TeacherInfo.buildFromCreatParam(saveParam);
+      return teacherInfoMapper.updateTeacherInfo(teacherInfoReq);
+
+    }
+
+    /**d
+     * 根据id查找教师信息
+     *
+     * @param code 教师学号
+     * @param name 姓名
+     * @return TeacherInfo 教师信息
+     */
+    public TeacherInfo  getTeacherInfo(Long code, String name) {
+      TeacherInfo teacherInfoResp = teacherInfoMapper.getTeacherInfo(code, name);
+      checkTeacherInfo(teacherInfoResp);
+      return teacherInfoResp;
+    }
+
   }
-
-  /**
-   * 根据编号删除教师
-   * @param code 教师编号
-   */
-  public int  deleteTeacherInfo(Long code, String name) {
-    TeacherInfo teacherInfoResp = teacherInfoMapper.getTeacherInfo(code, name);
-    checkTeacherInfo(teacherInfoResp);
-    return teacherInfoMapper.deleteTeacherInfo(code,name);
-  }
-
-  /**
-   * 更新教师信息
-   *
-   * @param param 教师信息
-   */
-  public int updateTeacherInfo(TeacherInfoCreatParam param) {
-
-    TeacherInfo teacherInfoResp = teacherInfoMapper.getTeacherInfo(param.getCode(),param.getName());
-    checkTeacherInfo(teacherInfoResp);
-    TeacherInfo teacherInfoReq = TeacherInfo.builder()
-        .code(param.getCode())
-        .name(param.getName())
-        .sex(param.getSex())
-        .age(param.getAge())
-        .classname(param.getClassname())
-        .build();
-    return teacherInfoMapper.updateTeacherInfo(teacherInfoReq);
-
-  }
-
-  public TeacherInfo  getTeacherInfo(Long code, String name) {
-    TeacherInfo teacherInfoResp = teacherInfoMapper.getTeacherInfo(code, name);
-    checkTeacherInfo(teacherInfoResp);
-    return teacherInfoResp;
-  }
-//TODO:
-//  public String  loginTeacher(Long code, String password) {
-//    TeacherInfo teacherInfo = teacherInfoMapper.loginTeacher(code, password);
-//    if(teacherInfo == null){
-//      return "编号或密码错误";
-//       }
-//    return "teacher[code: " + teacherInfo.getCode()+", name: " + teacherInfo.getName() + ", classname: " + teacherInfo.getClassname() + "]";
-//  }
-}
