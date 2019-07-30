@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <!-- 将namespace的值设置为DAO类对应的路径 -->
+<mapper namespace="com.blen.study.studentmanage.dao.StudentGradeMapper">
+
+<!-- 增加一条数据 -->
+<insert id="addStudentGrade" parameterType="com.blen.study.studentmanage.domain.StudentGrade" keyColumn="g_id" keyProperty="g_id"  useGeneratedKeys="true">
+        INSERT INTO student_grade(s_code,s_name,g_year,g_math,g_english,g_chinese) VALUES( #{s_code}, #{s_name}, #{g_year}, #{g_math}, #{g_english},#{g_chinese})
+    </insert>
+
+<!-- 删除一条数据 -->
+<delete id="deleteStudentGrade">
+        DELETE FROM student_grade WHERE student_grade.s_code = #{s_code} AND student_grade.g_year = #{g_year}
+    </delete>
+
+<!-- 更新一条数据 -->
+<update id="updateStudentGrade" parameterType="com.blen.study.studentmanage.domain.StudentGrade">
+        UPDATE student_grade SET student_grade.g_math = #{g_math} student_grade.g_english = #{g_english} student_grade.g_chinese = #{g_chinese}
+        WHERE student_grade.s_code = #{s_code} AND student_grade.g_year = #{g_year}
+    </update>
+
+<!-- 查询一条数据 -->
+<select id="getStudentGrade" resultMap="resultMap" >
+        SELECT * FROM student_grade WHERE student_grade.s_code = #{s_code} AND student_grade.g_year = #{g_year}
+    </select>
+
+  <resultMap id="resultMap" type="com.blen.study.studentmanage.domain.StudentGrade">
+    <id column="g_id" jdbcType="BIGINT" property="g_id"/>
+    <result column="s_code" jdbcType="BIGINT" property="s_code"/>
+    <result column="s_name" jdbcType="VARCHAR" property="s_name"/>
+    <result column="g_year" jdbcType="BIGINT" property="g_year"/>
+    <result column="g_math" jdbcType="DOUBLE" property="g_math"/>
+    <result column="g_english" jdbcType="DOUBLE" property="g_english"/>
+    <result column="g_chinese" jdbcType="DOUBLE" property="g_chinese"/>
+
+  </resultMap>
+
+</mapper>

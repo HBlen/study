@@ -1,0 +1,4 @@
+两者之间的差别
+restTemplate.getForEntity(URL + "/getCapabilityList?code=00&name=test-03&from=1&direct=asc&size=200", String.class);
+ResponseEntity<String> responseEntity = restTemplate.getForEntity(URL + "/getServiceCapability/004", String.class);
+   
