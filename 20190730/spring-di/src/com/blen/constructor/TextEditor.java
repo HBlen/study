@@ -3,12 +3,15 @@ package com.blen.constructor;
 import com.blen.constructor.SpellChecker;
 
 public class TextEditor {
+
   private SpellChecker spellChecker;
-  public TextEditor(SpellChecker spellChecker){
+
+  public TextEditor(SpellChecker spellChecker) {
     System.out.println("Inside TextEditor constructor.");
-    this.spellChecker=spellChecker;
+    this.spellChecker = spellChecker;
   }
-  public void spellCheck(){
+
+  public void spellCheck() {
     spellChecker.checkSpelling();
   }
 
