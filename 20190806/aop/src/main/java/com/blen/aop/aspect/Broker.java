@@ -10,8 +10,6 @@ import org.aspectj.lang.annotation.Before;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.stereotype.Component;
 
-@Component
-@Aspect
 public class Broker {
 
   /**
@@ -29,7 +27,6 @@ public class Broker {
 //  }
 
   //@Around
-  @Around("execution(* com.blen.aop.pojo.Landlord.service())")
   public void around(ProceedingJoinPoint joinPoint){
     System.out.println("带租客看房");
     System.out.println("谈价格");

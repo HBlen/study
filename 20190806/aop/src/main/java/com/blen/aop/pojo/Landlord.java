@@ -2,7 +2,6 @@ package com.blen.aop.pojo;
 
 import org.springframework.stereotype.Component;
 
-@Component
 public class Landlord {
 
   public void service(){
